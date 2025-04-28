@@ -1,8 +1,16 @@
-const path = require('path');
-const { release, version } = require('os');
-const { createServer: createServerHttp } = require('http');
-require('./files/c.cjs');
+import path from 'path';
+import { release, version } from 'os';
+import { createServer as createServerHttp } from 'http';
+import './files/c.cjs';
+import { fileURLToPath } from 'url';
+import { createRequire } from 'module'
 
+const currentModuleUrl = import.meta.url;
+
+const require = createRequire(currentModuleUrl);
+
+const __filename = fileURLToPath(currentModuleUrl);
+const __dirname = path.dirname(__filename);
 const random = Math.random();
 
 let unknownObject;
@@ -33,8 +41,5 @@ myServer.listen(PORT, () => {
     console.log('To terminate it, use Ctrl+C combination');
 });
 
-module.exports = {
-    unknownObject,
-    myServer,
-};
+export { unknownObject, myServer };
 
