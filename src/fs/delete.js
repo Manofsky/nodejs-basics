@@ -15,6 +15,8 @@ const remove = async () => {
         if (error.code === 'ENOENT') {
             throw new Error('FS operation failed');
         }
+
+        throw error;
     }
 };
 
